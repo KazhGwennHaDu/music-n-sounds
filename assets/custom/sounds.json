@@ -1,0 +1,11 @@
+{
+	"music.test.tuba_merchant": {
+		"category": "music",
+		"sounds": [
+		  {
+			"name": "music/test/tuba_merchant",
+			"stream": true
+		  }
+		]
+	}
+  }

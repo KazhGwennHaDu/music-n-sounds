@@ -1,0 +1,33 @@
+name: ZIP and Release
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  zip_n_release:
+    name: ZIP and release
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Zip Resource-Pack
+      run: zip -r music-n-sounds.zip . -x .git/* -x .github/*
+    - uses: actions/upload-artifact@v4
+      with:
+        name: release-pack
+        path: release/
+
+  release:
+    needs: zip_n_release
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download all release artifacts
+      uses: actions/download-artifact@v4
+      with:
+        pattern: release-*
+        path: release/
+        merge-multiple: true
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: release/*

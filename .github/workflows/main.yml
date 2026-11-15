@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Make release folder
+      run: mkdir release
     - name: Zip Resource-Pack
       run: zip -r release/music-n-sounds.zip . -x .git/* -x .github/*
     - uses: actions/upload-artifact@v4
